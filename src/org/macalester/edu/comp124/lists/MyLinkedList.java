@@ -29,8 +29,8 @@ public class MyLinkedList<E> {
      * @return
      */
 	public E get(int index) {
-        MyLinkedNode<E> current= head.getNext();
-        int n=index;
+        MyLinkedNode<E> current= head;
+        int n=index+1;
         while(n>0){
 
         current=current.getNext();
@@ -61,17 +61,24 @@ public class MyLinkedList<E> {
      */
 	public void add(int i, E elem) {
         int m=i;
-        MyLinkedNode<E> copy= head;
-        while (m>0){
-            copy=copy.getNext();
+        MyLinkedNode<E> copyp= head;
+        while (m>1){
+            copyp=copyp.getNext();
             m--;
         }
-        MyLinkedNode<E> copyp= copy.getPrev();
+if ( m<numElements-1){
+        MyLinkedNode<E> copyd= copyp.getNext();
+    copyp.setNext(new MyLinkedNode<E>(elem));
+    copyd.setPrev(copyp.getNext());
 
-       // E copied=copy.getValue();
-//if (m+1<numElements){
-        copyp.setNext(new MyLinkedNode<E>(elem));
-        copy.setPrev(copyp.getNext());
+}
+        else  {
+    MyLinkedNode<E> copyd=  tail.getPrev();
+    tail.setPrev(new MyLinkedNode<E>(elem));
+    copyd.setNext(tail.getPrev());
+
+}
+
         numElements++;
 
 
