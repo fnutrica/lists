@@ -9,7 +9,7 @@ import org.junit.Test;
  */
 public class DestructiveListTest
 {
-/*
+
 	@Test
 	public void testRemoveEvery()
 	{
@@ -278,7 +278,7 @@ public class DestructiveListTest
 		assertEquals("A", instance.get(5));
 	}
 
-*/
+
 
 	@Test
 	public void testRotate()

@@ -26,6 +26,6 @@ public class MyLinkedNode<E> {
 
     @Override public String toString()
     {
-        return "my value is "+value;
+        return " "+value;
     }
 }
