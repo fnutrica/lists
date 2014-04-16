@@ -12,7 +12,7 @@ package org.macalester.edu.comp124.lists;
 public class MyLinkedList<E> {
     private MyLinkedNode<E> head;
     private MyLinkedNode<E> tail;
-    private int numElements = 0;
+    protected int numElements = 0;
 
     /**
      * Creates a new empty linked list.
@@ -45,13 +45,15 @@ public class MyLinkedList<E> {
      *
      * @param elem
      */
-    public void add(E elem) {
-
-        MyLinkedNode<E> last = tail.getPrev();
-        tail.setPrev(new MyLinkedNode<E>(elem));
-        last.setNext(tail.getPrev());
+    public void add(E elem)
+    {
+        MyLinkedNode<E> oldLastNode = tail.getPrev();
+        MyLinkedNode<E> newLastNode = new MyLinkedNode<E>(elem);
+        oldLastNode.setNext(newLastNode);
+        newLastNode.setPrev(oldLastNode);
+        newLastNode.setNext(tail);
+        tail.setPrev(newLastNode);
         numElements++;
-
     }
 
     /**
@@ -72,7 +74,6 @@ public class MyLinkedList<E> {
             System.out.println(copyd.getValue());
             copyp.setNext(new MyLinkedNode<E>(elem));
             copyp.getNext().setNext(copyd);
-            //copyd.setPrev(copyp.getNext());
 
         }
         else  {
@@ -87,34 +88,21 @@ public class MyLinkedList<E> {
 
     }
 
-    /**
-     * Returns the current size of the list.
-     * @return
-     */
+
     public int size() {
         return numElements;
     }
 
-    /**
-     * Clears the contents of the list.
-     */
+
     public void clear() {
-        // set head's next to the tail
         head.setNext(tail);
         head.setPrev(null);
-
-        // set tails prev to the head
         tail.setPrev(head);
         tail.setNext(null);
         numElements = 0;
     }
 
-
-    /**
-     * These methods are only used by the unit tests.
-     * They are intentionally not public.
-     * @return
-     */
     MyLinkedNode getHead() { return head; }
     MyLinkedNode getTail() { return tail; }
+
 }
